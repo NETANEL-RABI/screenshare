@@ -14,6 +14,7 @@ function showApp(username) {
   $('who').textContent = username;
   $('auth').classList.add('hidden');
   $('app').classList.remove('hidden');
+  window.Share.onLogin();
 }
 function showAuth() {
   $('app').classList.add('hidden');
@@ -51,6 +52,7 @@ $('submit').onclick = async () => {
 $('password').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('submit').click(); });
 
 $('logout').onclick = async () => {
+  window.Share.stop();
   await api('/api/logout', {});
   showAuth();
 };
