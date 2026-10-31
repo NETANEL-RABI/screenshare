@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body { width: 300px; margin: 0; padding: 16px; font-family: system-ui, "Segoe UI", Arial, sans-serif; font-size: 15px; }
+    h1 { font-size: 18px; margin: 0 0 12px; }
+    label { display: block; font-size: 13px; color: #6b7280; margin-bottom: 4px; }
+    input { width: 100%; box-sizing: border-box; padding: 8px; border: 1px solid #c8ccd2; border-radius: 6px; direction: ltr; font-size: 14px; }
+    button { width: 100%; margin-top: 10px; padding: 10px; border: 0; border-radius: 6px; font-size: 15px; cursor: pointer; font-family: inherit; }
+    .main { background: #2563eb; color: #fff; }
+    .alt { background: #eef0f3; color: #1a1d21; }
+    #msg { color: #dc2626; font-size: 13px; min-height: 18px; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <h1>שיתוף מסך</h1>
+  <label for="url">כתובת האתר שלך</label>
+  <input id="url" placeholder="https://your-app.onrender.com">
+  <button id="open-window" class="main" type="button">פתח בחלון נפרד</button>
+  <button id="open-tab" class="alt" type="button">פתח בלשונית</button>
+  <div id="msg"></div>
+  <script src="popup.js"></script>
+</body>
+</html>
