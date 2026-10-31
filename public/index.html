@@ -13,15 +13,27 @@
     body { margin:0; min-height:100vh; display:grid; place-items:center; background:var(--bg); color:var(--text);
            font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif; }
     .card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:28px; width:min(380px,92vw); }
+    .card:has(#app:not(.hidden)) { width:min(820px,96vw); }
     h1 { margin:0 0 18px; font-size:22px; }
     .tabs { display:flex; gap:8px; margin-bottom:16px; }
     .tabs button { flex:1; padding:8px; border:1px solid var(--border); background:transparent; color:var(--text); border-radius:8px; cursor:pointer; }
     .tabs button.active { background:var(--primary); border-color:var(--primary); color:#fff; }
     label { display:block; font-size:14px; margin:12px 0 4px; color:var(--muted); }
     input { width:100%; padding:10px; border:1px solid var(--border); border-radius:8px; background:transparent; color:var(--text); font-size:16px; }
+    button { font-family: inherit; }
     .submit { width:100%; margin-top:18px; padding:11px; border:0; border-radius:8px; background:var(--primary); color:#fff; font-size:16px; cursor:pointer; }
+    .secondary { padding:10px 18px; border:1px solid var(--border); border-radius:8px; background:transparent; color:var(--text); font-size:16px; cursor:pointer; }
+    .danger { background:var(--err); }
+    .link { border:0; background:none; color:var(--primary); cursor:pointer; font-size:15px; }
+    .row { display:flex; gap:8px; }
+    .topbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
+    .divider { text-align:center; color:var(--muted); margin:18px 0 0; }
     .error { color:var(--err); font-size:14px; min-height:20px; margin-top:10px; }
-    .hidden { display:none; }
+    .status { color:var(--muted); font-size:14px; min-height:20px; margin-top:14px; }
+    video { width:100%; max-height:70vh; background:#000; border-radius:10px; }
+    #room-input { text-transform:uppercase; letter-spacing:3px; direction:ltr; }
+    #link { direction:ltr; }
+    .hidden { display:none !important; }
   </style>
 </head>
 <body>
@@ -41,11 +53,40 @@
     </section>
 
     <section id="app" class="hidden">
-      <h1>שלום, <span id="who"></span></h1>
-      <p>ההתחברות עובדת. בשלב הבא נוסיף כאן את שיתוף המסך.</p>
-      <button id="logout" class="submit" type="button">התנתק</button>
+      <div class="topbar">
+        <span>שלום, <b id="who"></b></span>
+        <button id="logout" class="link" type="button">התנתק</button>
+      </div>
+
+      <div id="panel-idle">
+        <button id="btn-share" class="submit" type="button" style="margin-top:0">שתף את המסך שלי</button>
+        <div class="divider">או</div>
+        <label for="room-input">קוד חדר לצפייה</label>
+        <div class="row">
+          <input id="room-input" maxlength="6" autocomplete="off">
+          <button id="btn-join" class="secondary" type="button">צפה</button>
+        </div>
+      </div>
+
+      <div id="panel-host" class="hidden">
+        <p>אתה משתף כעת. שלח לצופה את הקישור או את הקוד:</p>
+        <div class="row">
+          <input id="link" readonly>
+          <button id="btn-copy" class="secondary" type="button">העתק</button>
+        </div>
+        <p>קוד: <b id="room-code"></b> &nbsp;|&nbsp; צופים: <span id="viewer-count">0</span></p>
+        <button id="btn-stop" class="submit danger" type="button">הפסק שיתוף</button>
+      </div>
+
+      <div id="panel-viewer" class="hidden">
+        <video id="video" autoplay playsinline controls></video>
+        <button id="btn-leave" class="submit" type="button">עזוב</button>
+      </div>
+
+      <div id="share-status" class="status" role="status"></div>
     </section>
   </main>
+  <script src="share.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
