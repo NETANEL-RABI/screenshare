@@ -1,6 +1,6 @@
 {
   "name": "screenshare",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
@@ -12,6 +12,7 @@
     "cookie-parser": "^1.4.7",
     "express": "^5.3.0",
     "express-rate-limit": "^8.7.2",
-    "jsonwebtoken": "^9.0.3"
+    "jsonwebtoken": "^9.0.3",
+    "ws": "^8.22.1"
   }
 }
