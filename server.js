@@ -113,4 +113,14 @@ app.get('/api/me', requireAuth, (req, res) => {
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.listen(PORT, () => console.log(`השרת רץ על פורט ${PORT}`));
+const http = require('http');
+const server = http.createServer(app);
+require('./signaling')(server, (token) => {
+  try {
+    const { id } = jwt.verify(token, JWT_SECRET);
+    return findUserById.get(id) || null;
+  } catch {
+    return null;
+  }
+});
+server.listen(PORT, () => console.log(`השרת רץ על פורט ${PORT}`));
