@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "שיתוף מסך",
+  "version": "1.0.0",
+  "description": "פותח את אתר שיתוף המסך שלך בחלון נפרד",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "שיתוף מסך"
+  },
+  "permissions": ["storage"]
+}
